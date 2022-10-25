@@ -1,0 +1,15 @@
+.containerCard{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 1.5rem;
+   /*  width: ;  */
+    padding: 3% ; 
+    
+}
+
+.loadingg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
