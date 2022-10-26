@@ -14,19 +14,19 @@ import gif from './Pika-dance.gif';
 export default function Home(){
 
     const dispatch = useDispatch()
-    // const gif = 'https://media2.giphy.com/media/HeMju6ptLhZ7XCA4vH/giphy.gif?cid=790b7611adf768434dfa5bd572ec4332d478fca69a7bf862&rid=giphy.gif&ct=s'
+    
     const allPokemon = useSelector (state=>state?.pokemon)
     const allPokemon2 = useSelector (state=>state?.allPokemon)
-    console.log('ALLPOKE',allPokemon)
+    
     
     const [loadingg, setLoadingg] = useState(false)
     
     const actualPage = useSelector(state=>state?.recordedPage)
-    const filtered = useSelector(state=>state?.filterDone)
+    // const filtered = useSelector(state=>state?.filterDone)
     
 
     useEffect(()=>{
-        allPokemon.length===0&&dispatch(getAllPokemon())
+        
         dispatch(getAllPokemon())
         setTimeout( ()=>{
             setLoadingg(true) 
@@ -37,7 +37,7 @@ export default function Home(){
         }
     },[dispatch])
 
-    // console.log('ALL POKEMON', allPokemon)
+    
 
     
     const pokemonPerPage = 12

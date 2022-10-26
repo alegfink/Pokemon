@@ -9,12 +9,12 @@ const setTypes = async () =>{
         const pokemonTypes = await axios.get('https://pokeapi.co/api/v2/type');
         const types = pokemonTypes.data.results.map(el=>el.name)
         types.forEach(el=>{
-            // console.log('ELEMENTO', el)
+            
             Type.findOrCreate({
                 where: {name: el}
             })
         });
-        // console.log('TYPES', types)
+        
         return types
     }catch(err){
         throw new Error('error al setear types')

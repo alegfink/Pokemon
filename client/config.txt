@@ -337,8 +337,7 @@ module.exports = function (webpackEnv) {
       ],
       fallback: {
         "path": require.resolve("path-browserify"),
-        "assert": require.resolve("assert/"),
-        "fs": false
+        "assert": require.resolve("assert/")
       },
     },
     module: {

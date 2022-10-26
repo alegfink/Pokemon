@@ -4,61 +4,6 @@ const router = Router();
 const { Pokemon, Type } = require('../../db.js');
 const { type } = require('os');
 
-/*
-router.get('/', async(req,res)=>{
-    try{
-        let apiUrl = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=40')
-        let apiUrlPokemon = await Promise.all(
-         apiUrl.data.results.map(async el => {
-            const apiId = await axios.get(el.url)
-            const data = apiId.data
-            // console.log('APIID',apiId.data)
-            const asd = {
-                name: el.name,
-                id: data.id,
-                hp: data.stats.map(e=>{
-                    // console.log('ELEMENTO', e)
-                    // const statFiltered = e.stat.filter(elem=>{elem.name===hp})
-                    if (e.stat.name === 'hp'){
-                        return e.base_stat
-                    }
-                    // console.log('BASE STAT', statFiltered.base_stat)
-                    // return statFiltered.base_stat
-                })[0],
-                attack: data.stats.map(e=>{
-                    if (e.stat.name === 'attack'){
-                        return e.base_stat
-                    }
-                })[1],
-                defense: data.stats.map(e=>{
-                    if (e.stat.name === 'defense'){
-                        return e.base_stat
-                    }
-                })[2],
-                speed: data.stats.map(e=>{
-                    if (e.stat.name === 'speed'){
-                        return e.base_stat
-                    }
-                })[5],
-                height: data.height,
-                weight: data.weight,
-                type: data.types.map(e=>{return e.type.name}),
-                img: data.sprites.front_default
-            }
-            // console.log ('aaa', data.types)
-            
-            
-            // console.log ('ASD', asd)
-            return asd
-        })
-        )
-        // console.log('RESULT', apiUrlPokemon )
-        res.status(202).json(apiUrlPokemon)
-    }catch(err){
-        res.status(404).json('salio mal el primer get')
-    }
-})
-*/
 const getApiData = async()=>{
     try{
         let apiUrl = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=40')
@@ -66,18 +11,16 @@ const getApiData = async()=>{
          apiUrl.data.results.map(async el => {
             const apiId = await axios.get(el.url)
             const data = apiId.data
-            // console.log('APIID',apiId.data)
+            
             const asd = {
                 name: el.name,
                 id: data.id,
                 hp: data.stats.map(e=>{
-                    // console.log('ELEMENTO', e)
-                    // const statFiltered = e.stat.filter(elem=>{elem.name===hp})
+                    
                     if (e.stat.name === 'hp'){
                         return e.base_stat
                     }
-                    // console.log('BASE STAT', statFiltered.base_stat)
-                    // return statFiltered.base_stat
+                    
                 })[0],
                 attack: data.stats.map(e=>{
                     if (e.stat.name === 'attack'){
@@ -98,23 +41,13 @@ const getApiData = async()=>{
                 weight: data.weight,
                 types: data.types.map(e=>{return e.type.name}),
                 img: data.sprites.other.dream_world.front_default
-                //data.sprites.other.official-artwork.front_default?data.sprites.other.official-artwork.front_default:data.sprites.front_default
+                
             }
-            
-            // console.log('DATA TYPES', data.types)
-            // data.types.forEach(async e=>{
-            //     console.log('TYPE NAME', e.type.name)
-            //     await Type.findOrCreate({where:{name:e.type.name}})})
-
-            
-            // console.log ('aaa', data.types)
-            
-            
-            // console.log ('ASD', asd)
+           
             return asd
         })
         )
-        // console.log('RESULT', apiUrlPokemon )
+        
         return apiUrlPokemon
     }catch(err){
         return err
@@ -150,7 +83,7 @@ const getDbData = async()=>{
                     console.log('TYPES', elem.dataValues)
                     return elem.dataValues.name
                     }),
-                // handleCreated
+                
             }
         })
         console.log('INFO', info)

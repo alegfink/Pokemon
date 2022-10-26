@@ -23,7 +23,7 @@ export function getAllPokemon (){
     return function(dispatch){
         return axios.get('http://localhost:3001/pokemon')
         .then(json=>{
-            // console.log('ACTION', json.data)
+            
             dispatch({
                 type: GET_ALL_POKEMON,
                 payload: json.data
@@ -92,7 +92,7 @@ export function getPokemonDetail (id){
   return function (dispatch){
     return axios.get(`http://localhost:3001/pokemon/${id}`)
       .then(json=>{
-        // console.log('JSON', json.data)
+        
         dispatch({
           type: GET_DETAIL,
           payload: json.data

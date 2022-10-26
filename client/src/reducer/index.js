@@ -18,14 +18,14 @@ const initialState={
 function rootReducer (state = initialState, action){
     switch(action.type){
         case GET_ALL_POKEMON:
-            // console.log('ENTRANDO AL REDUCER')
+            
             return{
                 ...state,
                 allPokemon: action.payload,
-                // pokemon: action.payload
+                
             }
         case SEARCH_BY_NAME:
-            console.log('REDUCER', action.payload)
+            
             return{
                 ...state,
                 pokemonSearch: action.payload&&action.payload,
@@ -62,7 +62,7 @@ function rootReducer (state = initialState, action){
                     return 0
                 })
             console.log('REDUCER')
-            // console.log('ARRAY', arrayOrd)
+            
             return{
                 ...state,
                 pokemon: arrayOrd,

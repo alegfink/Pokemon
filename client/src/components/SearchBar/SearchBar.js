@@ -12,18 +12,17 @@ export default function SearchBar(){
     
     function handleInput(e){
         e.preventDefault()
-        // dispatch(resetMaxMin())
-        // dispatch(resetPage())
+        
         dispatch(setName(e.target.value))
-        // dispatch(searchByName(e.target.value))   
+          
     }
 
     function handleSelect(e){
-        console.log('TITULO', titulo)
+        
         e.preventDefault()
         dispatch(resetMaxMin())
         dispatch(resetPage())
-        // dispatch(setName(e.target.value))
+        
         dispatch(searchByName(titulo[0].toLowerCase()+titulo.slice(1))) 
     }
     

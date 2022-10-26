@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './Cards.module.css';
-// import imagen from './ditto.jpg';
 import imagen from './pokeball.png'
 
 export default function Card({name, img, types}){
@@ -22,23 +21,11 @@ export default function Card({name, img, types}){
                 <div className={s.types}>
                         {
                             tipo? tipo.map(e=>(
-                                <span className={e==='ground'&&s.ground || e==='rock'&&s.rock || e==='ice'&&s.ice || e==='shadow'&&s.shadow || e==='normal'&&s.normal || e==='bug'&&s.bug || e==='water'&&s.water || e==='dragon'&&s.dragon || e==='flying'&&s.flying || e==='steel'&&s.steel || e==='electric'&&s.electric || e==='flying'&&s.flying || e==='fairy'&&s.fairy || e==='fighting'&&s.fighting || e==='fire'&&s.fire || e==='psychic'&&s.psychic || e==='unknown'&&s.unknown || e==='poison'&&s.poison || e==='ghost'&&s.ghost || e==='grass'&&s.grass || e==='dark'&&s.dark } key={e}>{e.toUpperCase()}</span>
+                                <span className={(e==='ground'&&s.ground) || (e==='rock'&&s.rock) || (e==='ice'&&s.ice) || (e==='shadow'&&s.shadow) || (e==='normal'&&s.normal) || (e==='bug'&&s.bug) || (e==='water'&&s.water) || (e==='dragon'&&s.dragon) || (e==='flying'&&s.flying) || (e==='steel'&&s.steel) || (e==='electric'&&s.electric) || (e==='flying'&&s.flying) || (e==='fairy'&&s.fairy) || (e==='fighting'&&s.fighting) || (e==='fire'&&s.fire) || (e==='psychic'&&s.psychic) || (e==='unknown'&&s.unknown) || (e==='poison'&&s.poison) || (e==='ghost'&&s.ghost) || (e==='grass'&&s.grass) || (e==='dark'&&s.dark) } key={e}>{e.toUpperCase()}</span>
                             )): <ul >No tiene Tipo asociado</ul>
                         } 
                     </div>
-                {/* <h4 className={s.dietTitle}>Type:  */}
-                    {/* <ul>
-                        {
-                            tipo? tipo.map(e=>(
-                                <li key={e}>{e}</li>
-                            )): <li >No tiene Tipo asociado</li>
-                        }
-                    </ul> */}
-                    
-                {/* </h4> */}
-                {/* <div className={s.containerHS}>
-                    <h3 >HealthScore: {healthScore}</h3>
-                </div> */}
+                
                 </div>
             
             

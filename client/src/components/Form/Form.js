@@ -2,13 +2,14 @@ import React from 'react';
 import { useHistory} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { postNewPokemon, getAllTypes, getAllPokemon } from '../../actions';
+import { postNewPokemon, getAllTypes, getAllPokemon, searchByName } from '../../actions';
 import NavBar from '../NavBar/NavBar';
 import s from './Form.module.css';
-import { types } from '@babel/core';
-// import { validate } from './Errors.js';
+// import { types } from '@babel/core';
+// import { initializeConnect } from 'react-redux/es/components/connect';
 
-// let count = 0;
+
+let count = 0;
 
 export default function Form(){
   
@@ -16,12 +17,18 @@ export default function Form(){
     const typess = useSelector(state=>state?.allTypes)
     const history = useHistory()
     const [errors, seterrors] = useState('')
-    // const nameRepeated = useSelector(state=>state?.repeatName)
     const allPoke = useSelector(state=>state.allPokemon)
 
     useEffect(()=>{
         dispatch(getAllTypes())
         dispatch(getAllPokemon())
+
+        return function(){
+            
+          dispatch(searchByName(''))
+          count = 0
+          
+      }
     },[dispatch])
 
     const [input, setInput] = useState({
@@ -42,14 +49,15 @@ export default function Form(){
 
     function validate(input) {
         let errors = {};
-        
+        console.log('ALLPOKE', allPoke)
         const as = allPoke.map(el=>{
-            if(el.name[0].toLowerCase()+el.name.slice(1) ===input.title) return true})
+            if(el.name[0].toLowerCase()+el.name.slice(1) ===input.title[0]?.toLowerCase()+input.title.slice(1)) return true})
             const aa = as.includes(true)
-        
+            console.log('AA', aa)
         if (!input.title) {
           errors.title = 'Name is required';
         }
+        else if(!isNaN(input.title)){errors.title = 'Name cannot be a number'}
         else if(aa){errors.title = 'Name allready exist'};
         if (!input.hp) {
           errors.hp = 'Hp is required';
@@ -91,11 +99,9 @@ export default function Form(){
             
             errors.img = 'URL invalid'
         }
-        // if (count>2){
-        //   errors.types = 'You cannot choose more than 2 types'
-        // } else if (count<3) errors.types = '';
-        
-        
+        if (count>2){
+          errors.types = 'You cannot choose more than 2 types'
+        }
         return errors;
       };
 
@@ -113,11 +119,11 @@ export default function Form(){
     }
 
     function handleSubmit(e){
-        console.log('ERRORS', inputsError)
+        
         e.preventDefault()
         if(!inputsError.some(inp=>errors.hasOwnProperty(inp))&&input.title.length>0){
                 dispatch(postNewPokemon(input))
-                console.log('INPUT',input)
+                
                 
                     alert('Pokemon created successfully')
                     setInput({
@@ -148,27 +154,29 @@ export default function Form(){
                     ...input,
                     types: [...input.types, e.target.value]
                 });
-                // count++
-              //   seterrors(validate({
-              //     ...input,
-              //     [e.target.name]:e.target.value
-              // }))
+                count++
+                
+                seterrors(validate({
+                  ...input,
+                  
+              }))
             }
             
         }
         
     }
 
-    function handleDelete(el){
+    function handleDelete(e){
         setInput({
             ...input,
-            types: [...input.types.filter(type=> type !== el)]
+            types: [...input.types.filter(type=> type !== e)]
         })
-        // count--
-      //   seterrors(validate({
-      //     ...input,
-      //     [e.target.name]:e.target.value
-      // }))
+        count--
+        
+        seterrors(validate({
+          ...input,
+          
+      }))
         
     }
 
@@ -182,13 +190,19 @@ export default function Form(){
             <div className={s.container}>
             <form className={s.form} onSubmit={e=>handleSubmit(e)} >
                 
-                {/* <div></div> */}
+                
               <div className={s.group_title}>
                 <div className={s.group}>
                 <input className={s.input} type='text' name='title' value={input.name} placeholder='Name...' onChange={e=>handleChange(e)}></input>
+                
                 </div>
-                {errors.name && <span className={s.error}>{errors.name}</span>}
+                
               </div>
+              <div className={s.group_errorTitle}>
+                
+                {errors.title && <span className={s.error}>{errors.title}</span>}
+                
+                </div>
               <div className={s.group_score}>
               <div className={s.group}>
               <input className={s.input} type='number' name='hp' value={input.name} placeholder='Hp...' onChange={e=>handleChange(e)}></input>

@@ -8,7 +8,6 @@ router.get('/', async(req,res)=>{
     try{
         await setTypes()
         const types = await Type.findAll();
-        // console.log('TYPEEEE', types)
         types? res.status(202).json(types): res.status(404).json('no hay types creados')
     }catch(err){
         res.status(404).json('error al hacer el get a types')
