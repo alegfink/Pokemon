@@ -147,7 +147,7 @@ router.get('/:id', async(req,res)=>{
 router.post('/', async(req,res)=>{
     const{title, hp, attack, defense, speed, height, weight, img, types} = req.body
     try{
-        console.log('PROBANDOO1')
+        // console.log('PROBANDOO1')
         const nombre = title[0].toLowerCase()+title.slice(1)  
         const index = v4()
         const pokemon = await Pokemon.create({
